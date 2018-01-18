@@ -76,6 +76,11 @@ const getRoundWinner = roundNumber => {
 
 const getMoveWinner = (playerOneMoveType, playerOneMoveValue, playerTwoMoveType, playerTwoMoveValue) => {
         console.log('movewinner: player1=' + playerOneMoveType + ' - player2=' + playerTwoMoveType);
+
+        if (!playerOneMoveType || !playerOneMoveValue || !playerTwoMoveType || !playerTwoMoveValue) {
+            return null;
+        }
+
         if (playerOneMoveType === playerTwoMoveType) {
             if (playerOneMoveValue > playerTwoMoveValue) {
                 return 'Player One';
@@ -109,5 +114,27 @@ const getMoveWinner = (playerOneMoveType, playerOneMoveValue, playerTwoMoveType,
 };
 
 const getGameWinner = () => {
+
+    if (!playerOneMoveOneType || !playerOneMoveOneValue ||
+        !playerOneMoveTwoType || !playerOneMoveTwoValue ||
+        !playerOneMoveThreeType || !playerOneMoveThreeValue ||
+        !playerTwoMoveOneType || !playerTwoMoveOneValue ||
+        !playerTwoMoveTwoType || !playerTwoMoveTwoValue ||
+        !playerTwoMoveThreeType || !playerTwoMoveThreeValue) {
+        return null;
+    }
+
+    let winArray = [getRoundWinner(1), getRoundWinner(2), getRoundWinner(3)];
+    let playerOneWins = winArray.filter(function(item){return item === 'Player One';}).length;
+    let playerTwoWins = winArray.filter(function(item){return item === 'Player Two';}).length;
+    console.log('Player One won ' + playerOneWins + ' time(s)');
+    console.log('Player Two won ' + playerTwoWins + ' time(s)');
+    if (playerOneWins > playerTwoWins) {
+        return 'Player One';
+    } else if (playerTwoWins > playerOneWins) {
+        return 'Player Two';
+    } else {
+        return 'Tie';
+    }
 
 };
