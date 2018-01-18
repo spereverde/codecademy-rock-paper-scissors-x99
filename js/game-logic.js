@@ -1,25 +1,18 @@
 // All code should be written in this file.
 
-let playerOneMoveOneType = undefined;
-let playerOneMoveOneValue = undefined;
-let playerOneMoveTwoType = undefined;
-let playerOneMoveTwoValue = undefined;
-let playerOneMoveThreeType = undefined;
-let playerOneMoveThreeValue = undefined;
-
-let playerTwoMoveOneType = undefined;
-let playerTwoMoveOneValue = undefined;
-let playerTwoMoveTwoType = undefined;
-let playerTwoMoveTwoValue = undefined;
-let playerTwoMoveThreeType = undefined;
-let playerTwoMoveThreeValue = undefined;
+let playerOneMoveOneType, playerOneMoveOneValue,
+    playerOneMoveTwoType, playerOneMoveTwoValue,
+    playerOneMoveThreeType, playerOneMoveThreeValue,
+    playerTwoMoveOneType, playerTwoMoveOneValue,
+    playerTwoMoveTwoType, playerTwoMoveTwoValue,
+    playerTwoMoveThreeType, playerTwoMoveThreeValue;
 
 
 const setPlayerMoves = (player, moveOneType, moveOneValue, moveTwoType, moveTwoValue, moveThreeType, moveThreeValue) => {
-    if (
-        (moveOneType === 'rock' || moveOneType === 'paper' || moveOneType === 'scissors') &&
-        (moveTwoType === 'rock' || moveTwoType === 'paper' || moveTwoType === 'scissors') &&
-        (moveThreeType === 'rock' || moveThreeType === 'paper' || moveThreeType === 'scissors') ) {
+    if (isValidType(moveOneType) && isValidType(moveTwoType) && isValidType(moveThreeType)
+        && (isValidValue(moveOneValue) && isValidValue(moveTwoValue) && isValidValue(moveThreeValue))
+        && (moveOneValue + moveTwoValue + moveThreeValue == 99)
+    ) {
 
         if (player === "Player One") {
             playerOneMoveOneType = moveOneType;
@@ -40,7 +33,15 @@ const setPlayerMoves = (player, moveOneType, moveOneValue, moveTwoType, moveTwoV
     };
 
 
-}
+};
+
+const isValidType = moveType => {
+    return moveType === 'rock' || moveType === 'paper' || moveType === 'scissors';
+};
+
+const isValidValue = moveValue => {
+    return 1 <= moveValue <= 99;
+};
 
 const setComputerMoves = () => {
     randomType = Math.floor(Math.random() * 3);
@@ -58,7 +59,7 @@ const setComputerMoves = () => {
 
 };
 
-const getRoundWinner = () => {
+const getRoundWinner = roundNumber => {
 
 };
 
