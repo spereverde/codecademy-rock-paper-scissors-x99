@@ -30,9 +30,7 @@ const setPlayerMoves = (player, moveOneType, moveOneValue, moveTwoType, moveTwoV
             playerTwoMoveThreeValue = moveThreeValue;
         }
 
-    };
-
-
+    }
 };
 
 const isValidType = moveType => {
@@ -44,9 +42,9 @@ const isValidValue = moveValue => {
 };
 
 const setComputerMoves = () => {
-    randomType = Math.floor(Math.random() * 3);
+    let randomType = Math.floor(Math.random() * 3);
     console.log(randomType);
-    const moves = ['rock', 'paper', 'scissors']
+    const moves = ['rock', 'paper', 'scissors'];
     playerTwoMoveOneType = moves[Math.floor(Math.random() * 3)];
     playerTwoMoveTwoType = moves[Math.floor(Math.random() * 3)];
     playerTwoMoveThreeType = moves[Math.floor(Math.random() * 3)];
@@ -61,6 +59,53 @@ const setComputerMoves = () => {
 
 const getRoundWinner = roundNumber => {
 
+    switch (roundNumber) {
+        case 1:
+            return getMoveWinner(playerOneMoveOneType, playerOneMoveOneValue, playerTwoMoveOneType, playerTwoMoveOneValue);
+            break;
+        case 2:
+            return getMoveWinner(playerOneMoveTwoType, playerOneMoveTwoValue, playerTwoMoveTwoType, playerTwoMoveTwoValue);
+            break;
+        case 3:
+            return getMoveWinner(playerOneMoveThreeType, playerOneMoveThreeValue, playerTwoMoveThreeType, playerTwoMoveThreeValue);
+            break;
+        default:
+            return null;
+    }
+};
+
+const getMoveWinner = (playerOneMoveType, playerOneMoveValue, playerTwoMoveType, playerTwoMoveValue) => {
+        console.log('movewinner: player1=' + playerOneMoveType + ' - player2=' + playerTwoMoveType);
+        if (playerOneMoveType === playerTwoMoveType) {
+            if (playerOneMoveValue > playerTwoMoveValue) {
+                return 'Player One';
+            } else if (playerTwoMoveValue > playerOneMoveValue) {
+                return 'Player Two';
+            } else {
+                return 'Tie';
+            }
+        }
+        if (playerOneMoveType === 'rock') {
+            if (playerTwoMoveType === 'scissors') {
+                return 'Player One';
+            } else {
+                return 'Player Two';
+            }
+        }
+        if (playerOneMoveType === 'paper') {
+            if (playerTwoMoveType === 'rock') {
+                return 'Player One'
+            } else {
+                return 'Player Two'
+            }
+        }
+        if (playerOneMoveType === 'scissors') {
+            if (playerTwoMoveType === 'paper') {
+                return 'Player One'
+            } else {
+                return 'Player Two'
+            }
+        }
 };
 
 const getGameWinner = () => {
